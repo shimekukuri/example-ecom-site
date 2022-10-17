@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
+html {
+  @apply bg-neutral-50
+}
 body {
   padding: 0;
   margin: 0;
@@ -17,4 +19,132 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.card {
+  @apply shadow-lg rounded-lg bg-neutral-200
+}
+
+.primary-button {
+  @apply bg-blue-300 hover:bg-blue-600 outline-none shadow-md px-4 py-2 rounded-lg active:bg-blue-800
+}
+
+/*
+Animation classes and keyframes
+*/
+
+.card:hover {
+  animation: kf-card-hover 500ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-0 {
+  animation: kf-opacity 1s;
+  animation-delay: 0ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-50 {
+  animation: kf-opacity 1s;
+  animation-delay: 50ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-100 {
+  animation: kf-opacity 1s;
+  animation-delay: 100ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-150 {
+  animation: kf-opacity 1s;
+  animation-delay: 150ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-200 {
+  animation: kf-opacity 1s;
+  animation-delay: 200ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-250 {
+  animation: kf-opacity 1s;
+  animation-delay: 250ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-300 {
+  animation: kf-opacity 1s;
+  animation-delay: 300ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-350 {
+  animation: kf-opacity 1s;
+  animation-delay: 350ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-400 {
+  animation: kf-opacity 1s;
+  animation-delay: 400ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-450 {
+  animation: kf-opacity 1s;
+  animation-delay: 450ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-500 {
+  animation: kf-opacity 1s;
+  animation-delay: 500ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-550 {
+  animation: kf-opacity 1s;
+  animation-delay: 550ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-600 {
+  animation: kf-opacity 1s;
+  animation-delay: 600ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-800 {
+  animation: kf-opacity 1s;
+  animation-delay: 800ms;
+  animation-fill-mode: forwards;
+}
+
+.opacity-animation-1000 {
+  animation: kf-opacity 1s;
+  animation-delay: 1000ms;
+  animation-fill-mode: forwards;
+}
+
+
+@keyframes kf-card-hover {
+  from {
+    transform: scale(1.0);
+    filter:hue-rotate(90deg)
+  } 50% {
+    filter:hue-rotate(45deg)
+  } to {
+    transform: scale(1.05);
+    @apply shadow-2xl bg-yellow-200;
+  }
+}
+
+@keyframes kf-opacity {
+  from {
+    opacity: 0;
+  } to {
+    opacity: 1;
+  }
 }
