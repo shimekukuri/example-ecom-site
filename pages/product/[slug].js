@@ -48,11 +48,15 @@ export default function ProductPage(props) {
           </div>
           <div className="min-w-full bg-green-300 p-3 flex justify-between delay opacity-animation-400 opacity-0 rounded shadow-xl">
             <h2>Rating</h2>
-            <p>{product.rating} / 5 out of {product.numReviews} reviews</p>
+            <p>
+              {product.rating} / 5 out of {product.numReviews} reviews
+            </p>
           </div>
           <div className="min-w-full bg-cyan-300 p-3 flex justify-between delay opacity-animation-600 opacity-0 rounded shadow-xl">
             <h2>Number in stock</h2>
-            <p>{product.countInStock} {product.category}</p>
+            <p>
+              {product.countInStock} {product.category}
+            </p>
           </div>
           <div className="min-w-full bg-amber-300 p-3 flex flex-col items-center delay opacity-animation-800 opacity-0 rounded shadow-xl">
             <h2>Product Description</h2>
@@ -60,7 +64,10 @@ export default function ProductPage(props) {
               <p>{product.description}</p>
             </div>
           </div>
-          <button className="primary-button opacity-animation-1000 opacity-0">Add To Cart</button>
+          <div className="opacity-animation-1000 opacity-0 w-full lg:w-1/2 flex justify-between items-center bg-emerald-300 p-4 rounded-lg shadow-xl">
+            <div>${product.price}</div>
+            <button className="primary-button">Add To Cart</button>
+          </div>
         </div>
       </div>
     </Layout>

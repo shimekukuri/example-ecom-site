@@ -137,7 +137,7 @@ Animation classes and keyframes
     filter:hue-rotate(45deg)
   } to {
     transform: scale(1.05);
-    @apply shadow-2xl bg-yellow-200;
+    @apply shadow-2xl;
   }
 }
 
