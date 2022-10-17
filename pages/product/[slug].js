@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import Layout from "../../components/Layout";
 import db from "../../utils/db";
 import Product from "../../models/Product";
 import Link from "next/link";
 import Image from "next/image";
+import { UserState } from "../../utils/UserState";
+import { ACTIONS } from "../../utils/ACTIONS";
 
 export default function ProductPage(props) {
   const { product } = props;
+  const { state, dispatch } = useContext(UserState);
+
+  const handleAddToCart = () => {
+    dispatch({
+      type: ACTIONS.CART_ADD_ITEM,
+      payload: { ...product, quantity: 1 },
+    });
+    console.log(state)
+  };
 
   if (!product) {
     return (
@@ -66,7 +77,9 @@ export default function ProductPage(props) {
           </div>
           <div className="opacity-animation-1000 opacity-0 w-full lg:w-1/2 flex justify-between items-center bg-emerald-300 p-4 rounded-lg shadow-xl">
             <div>${product.price}</div>
-            <button className="primary-button">Add To Cart</button>
+            <button className="primary-button" onClick={handleAddToCart}>
+              Add To Cart
+            </button>
           </div>
         </div>
       </div>
