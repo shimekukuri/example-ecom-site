@@ -4,7 +4,7 @@ import Image from "next/image";
 import { UserState } from "../utils/UserState";
 import { ACTIONS } from "../utils/ACTIONS";
 
-export default function ProductItem({ product }) {
+export default function ProductItem({ product, handleAddToCart }) {
   const { state, dispatch } = useContext(UserState);
 
   return (
