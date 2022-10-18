@@ -1,8 +1,12 @@
 import Link from "next/link";
-import React from "react";
-import Image from "next/image"
+import React, { useContext } from "react";
+import Image from "next/image";
+import { UserState } from "../utils/UserState";
+import { ACTIONS } from "../utils/ACTIONS";
 
 export default function ProductItem({ product }) {
+  const { state, dispatch } = useContext(UserState);
+
   return (
     <div className="card">
       <Link href={`/product/${product.slug}`}>
@@ -27,7 +31,7 @@ export default function ProductItem({ product }) {
           <div className="">{product.brand}</div>
         </div>
         <p className="">${product.price}</p>
-        <button className="primary-button" type="button">
+        <button className="primary-button" type="button" onClick={() => handleAddToCart(product)}>
           Add to Cart
         </button>
       </div>

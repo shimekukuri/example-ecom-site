@@ -1,8 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
+import { UserState } from "../utils/UserState";
 import Head from "next/head";
 import Link from "next/link";
 
 export default function Layout({ title, children }) {
+
+
   return (
     <>
       <Head>
@@ -19,7 +22,7 @@ export default function Layout({ title, children }) {
               <a className="text-lg font-bold">Example Shopping Site</a>
             </Link>
             <div>
-              <Link href="/cart">
+              <Link href="/Cart">
                 <a className="p-2">Cart</a>
               </Link>
               <Link href="/login">
