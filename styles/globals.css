@@ -29,6 +29,10 @@ a {
   @apply shadow-lg rounded-lg bg-neutral-200
 }
 
+.card-with-hover {
+  @apply shadow-xl rounded-lg bg-neutral-200
+}
+
 .primary-button {
   @apply bg-blue-300 hover:bg-blue-600 outline-none shadow-md px-4 py-2 rounded-lg active:bg-blue-800
 }

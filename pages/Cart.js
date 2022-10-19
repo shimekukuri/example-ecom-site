@@ -21,13 +21,12 @@ function Cart() {
     const qty = Number.parseInt(newQuantity);
     const serverData = await axios.get(`/api/products/${item._id}`);
     if (serverData.countInStock < qty) {
-      alert('sorry item not available')
+      alert("sorry item not available");
     }
     dispatch({
       type: ACTIONS.CART_ADD_ITEM,
       payload: { ...item, quantity: qty },
     });
-    alert("Quantity udpated")
   };
 
   return (
@@ -101,6 +100,40 @@ function Cart() {
                   </div>
                 </>
               ))}
+            </div>
+          </div>
+          <div className="col-span-2 lg:px-10">
+            <div>
+              <div className="card-with-hover lg:w-9/12 h-full m-auto">
+                <h2 className="w-full text-center text-3xl">Total</h2>
+                <div className="flex justify-between px-4 border-b-2 border-gray-600 border-opacity-20">
+                  <div>Number of Items</div>
+                  <div>
+                    {cartItems.reduce(
+                      (total, current) => (total += current.quantity),
+                      0
+                    )}
+                  </div>
+                </div>
+                <div className="flex justify-between px-4 border-b-2 border-gray-600 border-opacity-20">
+                  <div>test</div>
+                  <div>test</div>
+                </div>
+                <div className="flex justify-between px-4 border-b-2 border-gray-600 border-opacity-20">
+                  <div>Total Before Tax</div>
+                  <div className="">
+                    $
+                    {cartItems.reduce(
+                      (total, current) =>
+                        (total += current.quantity * current.price),
+                      0
+                    )}
+                  </div>
+                </div>
+                <div className="flex justify-center py-4">
+                  <button className="primary-button">Check Out</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
