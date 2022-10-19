@@ -42,8 +42,8 @@ function Cart() {
         </Link>
       ) : (
         <div className="grid md:grid-cols-4 gap-4">
-          <div className="col-span-2 card-no-hover py-2 px-1 shadow-xl">
-            <div className="grid grid-cols-5 gap-0 overflow-x-auto">
+          <div className="col-span-2 card-no-hover py-2 px-1 shadow-xl overflow-x-auto">
+            <div className="grid grid-cols-5 gap-0">
               <div className="border-b border-black flex justify-center items-center text-center">
                 Product
               </div>
@@ -86,17 +86,17 @@ function Cart() {
                     </select>
                   </div>
                   <div className="border-b border-black flex justify-center items-center">
-                    ${item.price}.00
+                    ${item.price}
                   </div>
                   <div className="border-b border-black flex justify-center items-center underline">
-                    ${item.price * item.quantity}.00
+                    ${item.price * item.quantity}
                   </div>
                   <div className="border-b border-black flex justify-center items-center">
                     <button
-                      className="primary-button"
+                      className="primary-button w-2/3"
                       onClick={() => handleRemoveItem(item)}
                     >
-                      Remove
+                      X
                     </button>
                   </div>
                 </>
