@@ -6,6 +6,7 @@ import db from "../utils/db";
 import { UserState } from "../utils/UserState";
 import axios from "axios";
 import { ACTIONS } from "../utils/ACTIONS";
+import { toast } from "react-toastify";
 
 export default function Home({ products }) {
   const { state, dispatch } = useContext(UserState);
@@ -18,13 +19,13 @@ export default function Home({ products }) {
     const { data } = await axios.get(`/api/products/${item._id}`);
 
     if (qty > data.countInStock) {
-      return alert("product is out of stock via server");
+      toast.error("Exceeds stock in warehouse");
+      return;
     }
     dispatch({
       type: ACTIONS.CART_ADD_ITEM,
       payload: { ...item, quantity: qty },
     });
-
   };
 
   return (
