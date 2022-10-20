@@ -1,10 +1,17 @@
-import React, {useContext} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { UserState } from "../utils/UserState";
+import Cookies from "js-cookie";
 import Head from "next/head";
 import Link from "next/link";
 
 export default function Layout({ title, children }) {
+  const [cartItemCount, setCartItemCount] = useState(0);
+  const { state, dispatch } = useContext(UserState);
+  const { cart } = state;
 
+  useEffect(() => {
+    setCartItemCount(cart.cartItems.reduce((a, c) => (a += c.quantity), 0));
+  }, [cart.cartItems]);
 
   return (
     <>
@@ -23,7 +30,7 @@ export default function Layout({ title, children }) {
             </Link>
             <div>
               <Link href="/Cart">
-                <a className="p-2">Cart</a>
+                <a className="p-2">Cart {cartItemCount > 0 && <span className="rounded-full bg-white px-3">{cartItemCount}</span>}</a>
               </Link>
               <Link href="/login">
                 <a className="p-2">Login</a>
@@ -32,7 +39,9 @@ export default function Layout({ title, children }) {
           </nav>
         </header>
         <main className="container m-auto mt-4 px-4">{children}</main>
-        <footer className="flex justify-center items-center h-10 shadow-inner bg-white mt-4">CopyRight Example Shopping Site</footer>
+        <footer className="flex justify-center items-center h-10 shadow-inner bg-white mt-4">
+          CopyRight Example Shopping Site
+        </footer>
       </div>
     </>
   );
