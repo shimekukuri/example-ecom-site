@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Layout from "../components/Layout";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import { signIn } from "next-auth/react"
 
 export default function Register() {
   const [showAdminOptions, setShowAdminOptions] = useState(false);
+
+  const router = useRouter();
 
   const {
     handleSubmit,
@@ -28,13 +32,24 @@ export default function Register() {
     })
       .then((response) => {
         if (!response.ok) {
-           throw response.json();
+          throw response.json();
         }
         return response.json();
       })
-      .then((data) => toast.success(data.message))
+      .then((data) => toast.success(data?.message))
+      .then(() => signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      }))
+      .then(() => {
+        toast.info("You'll be Redirected");
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      })
       .catch((err) => err)
-      .then((data) => toast.error(data.message))
+      .then((data) => toast.error(data?.message))
   };
 
   const handleShowAdminOptions = (e) => {
