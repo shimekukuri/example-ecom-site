@@ -4,8 +4,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function Layout({ title, children }) {
+  const { status, data: session } = useSession();
+
   const [cartItemCount, setCartItemCount] = useState(0);
   const { state, dispatch } = useContext(UserState);
   const { cart } = state;
@@ -30,14 +33,31 @@ export default function Layout({ title, children }) {
         <header>
           <nav className="flex h-12 items-center justify-between shadow-md px-4 bg-orange-300">
             <Link href="/">
-              <a className="text-lg font-bold">Example Shopping Site</a>
+              <a className="md:text-lg text-sm font-bold">
+                Example Shopping Site
+              </a>
             </Link>
             <div>
+              {status === "loading" ? (
+                "Loading"
+              ) : session?.user ? (
+                <span className="text-xs md:text-xl mr-3">
+                  {session.user.name.split(" ")[0]}
+                </span>
+              ) : (
+                <Link href="/login">
+                  <a className="p-2">Login</a>
+                </Link>
+              )}
               <Link href="/Cart">
-                <a className="p-1">Cart {cartItemCount > 0 && <span className="rounded-full bg-white px-3">{cartItemCount}</span>}</a>
-              </Link>
-              <Link href="/login">
-                <a className="p-2">Login</a>
+                <a className="p-1 md:pl-3 text-xs md:text-xl">
+                  Cart{" "}
+                  {cartItemCount > 0 && (
+                    <span className="rounded-full bg-white px-3">
+                      {cartItemCount}
+                    </span>
+                  )}
+                </a>
               </Link>
             </div>
           </nav>
