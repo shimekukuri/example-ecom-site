@@ -140,6 +140,12 @@ Animation classes and keyframes
   animation-fill-mode: forwards;
 }
 
+.width-animation {
+  animation: kf-zero2fullw 2s;
+  animation-delay: 200ms;
+  animation-fill-mode: forwards;
+}
+
 
 @keyframes kf-card-hover {
   from {
@@ -158,5 +164,15 @@ Animation classes and keyframes
     opacity: 0;
   } to {
     opacity: 1;
+  }
+}
+
+@keyframes kf-zero2fullw {
+  from {
+    opacity: 0;
+    width: 0%;
+  } to {
+    opacity: 1;
+    width: 100%;
   }
 }
