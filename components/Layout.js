@@ -34,7 +34,7 @@ export default function Layout({ title, children }) {
             </Link>
             <div>
               <Link href="/Cart">
-                <a className="p-2">Cart {cartItemCount > 0 && <span className="rounded-full bg-white px-3">{cartItemCount}</span>}</a>
+                <a className="p-1">Cart {cartItemCount > 0 && <span className="rounded-full bg-white px-3">{cartItemCount}</span>}</a>
               </Link>
               <Link href="/login">
                 <a className="p-2">Login</a>

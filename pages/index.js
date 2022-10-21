@@ -26,6 +26,7 @@ export default function Home({ products }) {
       type: ACTIONS.CART_ADD_ITEM,
       payload: { ...item, quantity: qty },
     });
+    toast.success("Item added to cart")
   };
 
   return (

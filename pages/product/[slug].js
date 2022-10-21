@@ -6,15 +6,24 @@ import Link from "next/link";
 import Image from "next/image";
 import { UserState } from "../../utils/UserState";
 import { ACTIONS } from "../../utils/ACTIONS";
+import { toast } from "react-toastify";
 
 export default function ProductPage(props) {
   const { product } = props;
   const { state, dispatch } = useContext(UserState);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
+    const exists = state.cart.cartItems.find((item) => item.slug === product.slug);
+    const quantity = exists ? exists.quantity + 1 : 1;
+
+    if(quantity > product.countInStock) {
+      toast.error("Sorry, ammount selected exceeds count in stock");
+      return;
+    }
+
     dispatch({
       type: ACTIONS.CART_ADD_ITEM,
-      payload: { ...product, quantity: 1 },
+      payload: { ...product, quantity: quantity },
     });
     console.log(state)
   };
