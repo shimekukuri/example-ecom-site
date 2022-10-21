@@ -37,6 +37,10 @@ a {
   @apply bg-blue-300 hover:bg-blue-600 outline-none shadow-md px-4 py-2 rounded-lg active:bg-blue-800
 }
 
+.dropdown-link {
+  @apply flex px-11 py-5 hover:bg-gray-200;
+}
+
 /*
 Animation classes and keyframes
 */

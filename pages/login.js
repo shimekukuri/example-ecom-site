@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import Layout from "../components/Layout";
-import toast from "react-toastify";
+import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 export default function LoginPage() {
@@ -65,7 +65,7 @@ export default function LoginPage() {
               })}
             ></input>
             {errors.email && (
-              <div className="text-red-600 text-3xl">
+              <div className="text-red-600 text-lg">
                 {errors.email.message}
               </div>
             )}
@@ -84,8 +84,8 @@ export default function LoginPage() {
               })}
             ></input>
             {errors.password && (
-              <div className="text-red-600 text-3xl">
-                {errors.email.message}
+              <div className="text-red-600 text-lg">
+                {errors.password.message}
               </div>
             )}
             <div className="w-full flex justify-center mb-4">

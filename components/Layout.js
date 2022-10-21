@@ -4,7 +4,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
+import { Menu } from "@headlessui/react";
+import DropdownLink from "./DropdownLink";
+import Cookies from "js-cookie";
 
 export default function Layout({ title, children }) {
   const { status, data: session } = useSession();
@@ -16,6 +19,12 @@ export default function Layout({ title, children }) {
   useEffect(() => {
     setCartItemCount(cart.cartItems.reduce((a, c) => (a += c.quantity), 0));
   }, [cart.cartItems]);
+
+  const handleLogout = () => {
+    dispatch({ type: "CART_RESET" });
+    Cookies.remove("cart");
+    signOut({ callbackUrl: "/login" });
+  };
 
   return (
     <>
@@ -41,16 +50,47 @@ export default function Layout({ title, children }) {
               {status === "loading" ? (
                 "Loading"
               ) : session?.user ? (
-                <span className="text-xs md:text-xl mr-3">
-                  {session.user.name.split(" ")[0]}
+                <span className="text-xs md:text-xl mr-3 font-bold">
+                  <Menu as="div" className="inline-block relative">
+                    <Menu.Button className="text-blue-500">
+                      {session.user.name.split(" ")[0]}
+                    </Menu.Button>
+                    <Menu.Items className="absolute right-0 w-56 origin-top-right bg-white shadow-lg rounded-xl z-10">
+                      <Menu.Item>
+                        <DropdownLink
+                          className="dropdown-link rounded-t-xl"
+                          href="/profile"
+                        >
+                          Profile
+                        </DropdownLink>
+                      </Menu.Item>
+                      <Menu.Item>
+                        <DropdownLink
+                          className="dropdown-link"
+                          href="/order-history"
+                        >
+                          Order History
+                        </DropdownLink>
+                      </Menu.Item>
+                      <Menu.Item>
+                        <a
+                          className="dropdown-link rounded-b-xl"
+                          href="#"
+                          onClick={handleLogout}
+                        >
+                          Logout
+                        </a>
+                      </Menu.Item>
+                    </Menu.Items>
+                  </Menu>
                 </span>
               ) : (
                 <Link href="/login">
-                  <a className="p-2">Login</a>
+                  <a className="p-2 text-xs md:text-xl font-bold">Login</a>
                 </Link>
               )}
               <Link href="/Cart">
-                <a className="p-1 md:pl-3 text-xs md:text-xl">
+                <a className="p-1 md:pl-3 text-xs md:text-xl font-bold">
                   Cart{" "}
                   {cartItemCount > 0 && (
                     <span className="rounded-full bg-white px-3">
