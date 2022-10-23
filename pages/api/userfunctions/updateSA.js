@@ -28,21 +28,24 @@ const handler = async (req, res) => {
     case "remove": {
       const { shippingAddress, email } = req.body;
       const { _id } = shippingAddress;
-      
-      db.connect();
+
       if (!email || !_id) {
         res.status(422).send({ message: "Missing paramters" });
         return;
       }
+
+      db.connect();
       let user = await User.findOne({ email: email });
+
       const result = await user.shippingAddress.filter((x) => {
         return JSON.stringify(x._id) !== JSON.stringify(_id);
       });
 
       user.shippingAddress = [...result];
       user.save();
-      res.status(200).send(user.shippingAddress)
+      res.status(200).send(user.shippingAddress);
       db.disconnect();
+
       return;
     }
   }
