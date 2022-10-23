@@ -41,6 +41,19 @@ function reducer(state, action) {
         },
       };
     }
+    case ACTIONS.SET_SHIPPING_ADDRESS: {
+      Cookies.set({
+        ...state,
+        cart: {
+          ...state.cart,
+          shippingAddress: { ...state.cart.shippingAddress, ...action.payload },
+        },
+      });
+      return {
+        ...state,
+        cart: { ...state.cart, shippingAddress: {...state.cart.shippingAddress, ...action.payload} },
+      };
+    }
     default: {
       return state;
     }

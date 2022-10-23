@@ -6,11 +6,29 @@ const data = {
     email: 'jhutchinson192390@gmail.com',
     password: bcrypt.hashSync('Snowman@1923'),
     isAdmin: true,
+    shippingAddress: [
+      {
+        fullName: "tyler James Hutchinson",
+        address: "1111 carraige parc drive",
+        city: "Chattanooga",
+        postal: "37421",
+        country: "USA"
+      }
+    ]
   }, {
     name: 'example user',
     email: 'user@example.com',
     password: bcrypt.hashSync('P@ssW0rd'),
     isAdmin: false,
+    shippingAddress: [
+      {
+        fullName: "Example Example",
+        address: "1234 exmaple drive",
+        city: "Examplenapolis",
+        postal: "99999",
+        country: "Cambodia"
+      }
+    ]
   }],
   products: [
     {

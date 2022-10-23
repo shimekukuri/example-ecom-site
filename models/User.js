@@ -6,11 +6,20 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     isAdmin: { type: Boolean, required: true, default: false },
+    shippingAddress: [
+      {
+        fullName: { type: String, required: false, },
+        address: { type: String, required: false },
+        city: { type: String, required: false },
+        postal: { type: String, required: false },
+        country: { type: String, required: false },
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-const User = mongoose.models.User || mongoose.model('User', userSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 export default User;
