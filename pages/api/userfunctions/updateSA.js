@@ -1,6 +1,5 @@
 import db from "../../../utils/db";
 import User from "../../../models/User";
-import bcryptjs from "bcryptjs";
 
 const handler = async (req, res) => {
   const { updateType } = req.body;

@@ -51,7 +51,10 @@ function reducer(state, action) {
       });
       return {
         ...state,
-        cart: { ...state.cart, shippingAddress: {...state.cart.shippingAddress, ...action.payload} },
+        cart: {
+          ...state.cart,
+          shippingAddress: { ...state.cart.shippingAddress, ...action.payload },
+        },
       };
     }
     default: {
