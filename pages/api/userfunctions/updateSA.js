@@ -26,24 +26,20 @@ const handler = async (req, res) => {
       return;
     }
     case "remove": {
-      db.connect();
       const { shippingAddress, email } = req.body;
       const { _id } = shippingAddress;
-      //paramters needed: _id for shipping address, and user email to select account
-      //if _id or email is not parameter return error
+      
+      db.connect();
       if (!email || !_id) {
         res.status(422).send({ message: "Missing paramters" });
         return;
       }
-      //select user account from DB
       let user = await User.findOne({ email: email });
-      //filter through shippingAddress and return all that are not the one that has the provided object ID
       const result = await user.shippingAddress.filter((x) => {
         return JSON.stringify(x._id) !== JSON.stringify(_id);
       });
-      // user = {...user, shippingAddress: [...result]}
+
       user.shippingAddress = [...result];
-      console.log(user);
       user.save();
       res.status(200).send(user.shippingAddress)
       db.disconnect();
