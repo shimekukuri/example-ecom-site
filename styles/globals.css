@@ -22,19 +22,19 @@ a {
 }
 
 .card {
-  @apply shadow-lg rounded-lg bg-neutral-200
+  @apply shadow-2xl rounded-lg bg-gradient-to-r from-sky-300 to-indigo-300
 }
 
 .card-no-hover {
-  @apply shadow-lg rounded-lg bg-neutral-200
+  @apply shadow-lg rounded-lg bg-white
 }
 
 .card-with-hover {
-  @apply shadow-xl rounded-lg bg-neutral-200
+  @apply shadow-xl rounded-lg bg-white
 }
 
 .primary-button {
-  @apply bg-blue-300 hover:bg-blue-600 outline-none shadow-md px-4 py-2 rounded-lg active:bg-blue-800
+  @apply bg-blue-500 hover:bg-blue-600 outline-none shadow-md px-4 py-2 rounded-lg active:bg-blue-800
 }
 
 .dropdown-link {

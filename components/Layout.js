@@ -41,7 +41,7 @@ export default function Layout({ title, children }) {
 
       <div className="flex min-h-screen flex-col justify-between bg-gradient-to-r from-purple-500 to-pink-500">
         <header>
-          <nav className="flex h-12 items-center justify-between shadow-md px-4 bg-orange-300">
+          <nav className="flex h-12 items-center justify-between shadow-2xl px-4 bg-gradient-to-r from-cyan-300 to-blue-300">
             <Link href="/">
               <a className="md:text-lg text-sm font-bold">
                 Example Shopping Site

@@ -23,7 +23,6 @@ export default function ReviewOrder() {
             <p className="mt-4">
               Your Order will be placed after selecting place Order...
             </p>
-            <hr />
             <p>
               Once your order is placed and saved, but will not be shipped until
               payment is fullfilled in the final checkout{" "}
