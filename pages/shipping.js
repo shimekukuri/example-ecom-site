@@ -118,7 +118,7 @@ export default function Shipping() {
     <Layout>
       <CheckOut step={1} />
       <div className="mt-4 px-4 py-1 flex justify-center">
-        <div className="p-8 bg-slate-300 w-full md:w-2/5 lg:w-2/5 rounded-xl shadow-xl">
+        <div className="p-4 md:p-8 bg-slate-300 w-full md:w-2/5 lg:w-2/5 rounded-xl shadow-xl">
           <h1 className="px-4 pb-4 text-center text-2xl font-bold">
             Shipping Address
           </h1>
@@ -194,7 +194,7 @@ export default function Shipping() {
                 {...register("country", { required: "Please Enter Country" })}
               />
             </div>
-            <button>test</button>
+            <button className="primary-button">Proceed To Payment</button>
           </form>
         </div>
       </div>

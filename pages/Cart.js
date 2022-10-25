@@ -6,9 +6,11 @@ import Image from "next/image";
 import { ACTIONS } from "../utils/ACTIONS";
 import dynamic from "next/dynamic";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 function Cart() {
   const { state, dispatch } = useContext(UserState);
+  const router = useRouter();
   const {
     cart: { cartItems },
   } = state;
@@ -131,7 +133,12 @@ function Cart() {
                   </div>
                 </div>
                 <div className="flex justify-center py-4">
-                  <button className="primary-button">Check Out</button>
+                  <button
+                    className="primary-button"
+                    onClick={() => router.push("login?redirect=/shipping")}
+                  >
+                    Check Out
+                  </button>
                 </div>
               </div>
             </div>
