@@ -11,9 +11,9 @@ import { ACTIONS } from "../utils/ACTIONS";
 export default function Shipping() {
   const [addressList, setAddressList] = useState();
   const { state, dispatch } = useContext(UserState);
+  const { cart } = state;
   const { status, data: session } = useSession();
   const router = useRouter();
-  const { cart } = state;
   const {
     handleSubmit,
     register,
@@ -111,7 +111,7 @@ export default function Shipping() {
         },
       })
     );
-    //router.push("/payment");
+    router.push("/payment");
   };
 
   return (

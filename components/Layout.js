@@ -39,7 +39,7 @@ export default function Layout({ title, children }) {
 
       <ToastContainer limit={3} position="top-center" />
 
-      <div className="flex min-h-screen flex-col justify-between">
+      <div className="flex min-h-screen flex-col justify-between bg-gradient-to-r from-purple-500 to-pink-500">
         <header>
           <nav className="flex h-12 items-center justify-between shadow-md px-4 bg-orange-300">
             <Link href="/">
@@ -103,7 +103,7 @@ export default function Layout({ title, children }) {
             </div>
           </nav>
         </header>
-        <main className="container m-auto mt-4 px-4">{children}</main>
+        <main className="container m-auto mt-4 px-4 ">{children}</main>
         <footer className="flex justify-center items-center h-10 shadow-inner bg-white mt-4">
           CopyRight Example Shopping Site
         </footer>
