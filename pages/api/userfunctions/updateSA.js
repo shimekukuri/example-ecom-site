@@ -47,6 +47,20 @@ const handler = async (req, res) => {
 
       return;
     }
+    case "get": {
+      const { email } = req.body;
+
+      if (!email) {
+        res.status(422).send({ message: "Missing email address" });
+      }
+
+      db.connect();
+      let user = await User.findOne({ email: email });
+      const { shippingAddress } = user;
+      res.status(200).send({shippingAddress});
+      db.disconnect();
+      return;
+    }
   }
 
   res.status(500).send({ message: "Unkown error" });
