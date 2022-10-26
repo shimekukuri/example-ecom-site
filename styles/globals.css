@@ -25,6 +25,10 @@ a {
   @apply shadow-2xl rounded-lg bg-gradient-to-r from-sky-300 to-indigo-300
 }
 
+.cardd {
+  @apply shadow-2xl rounded-lg bg-gradient-to-r from-sky-300 to-indigo-300
+}
+
 .card-no-hover {
   @apply shadow-lg rounded-lg bg-white
 }

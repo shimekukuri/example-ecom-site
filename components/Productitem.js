@@ -23,7 +23,7 @@ export default function ProductItem({ product, handleAddToCart }) {
       <div className="flex flex-col items-center gap-1 justify-center lg:p-5">
         <Link href={`/product/${product.slug}`}>
           <a className="w-full flex justify-center items-center">
-            <h2 className="text-lg">{product.name}</h2>
+            <h2 className="text-xl font-bold">{product.name}</h2>
           </a>
         </Link>
         <div className="mb-2 flex w-full items-center justify-evenly px-5">
@@ -31,7 +31,7 @@ export default function ProductItem({ product, handleAddToCart }) {
           <div className="">{product.brand}</div>
         </div>
         <p className="">${product.price}</p>
-        <button className="primary-button" type="button" onClick={() => handleAddToCart(product)}>
+        <button className="primary-button mb-4" type="button" onClick={() => handleAddToCart(product)}>
           Add to Cart
         </button>
       </div>

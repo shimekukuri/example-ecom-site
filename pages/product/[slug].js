@@ -56,7 +56,7 @@ export default function ProductPage(props) {
             className="rounded-lg shadow-lg"
           />
         </div>
-        <div className="card md:col-span-2 flex flex-col items-center p-3 gap-4">
+        <div className="cardd md:col-span-2 flex flex-col items-center p-3 gap-4 shadow-2xl">
           <h1 className="text-2xl py-4">{product.name}</h1>
           <div className="min-w-full bg-red-300 p-3 flex justify-between delay opacity-animation-0 opacity-0 rounded shadow-xl">
             <h2>Category</h2>

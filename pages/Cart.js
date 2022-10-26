@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 function Cart() {
   const { state, dispatch } = useContext(UserState);
   const router = useRouter();
+  const { redirect } = router.query;
   const {
     cart: { cartItems },
   } = state;
@@ -135,7 +136,7 @@ function Cart() {
                 <div className="flex justify-center py-4">
                   <button
                     className="primary-button"
-                    onClick={() => router.push("login?redirect=/shipping")}
+                    onClick={() => router.push(redirect || "login?redirect=/shipping")}
                   >
                     Check Out
                   </button>
