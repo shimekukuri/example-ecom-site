@@ -18,6 +18,16 @@ function ReviewOrder() {
   const router = useRouter();
   console.log(cartItems);
 
+  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
+
+  const itemsPrice = round2(
+    cartItems.reduce((t, c) => t + c.quantity * c.price, 0)
+  );
+
+  const shippingPrice = itemsPrice > 200 ? 0 : 15;
+  const taxPrice = round2(itemsPrice * 0.15);
+  const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
+
   return (
     <Layout>
       <CheckOut step={3} />
@@ -89,18 +99,42 @@ function ReviewOrder() {
               </tbody>
             </table>
             <div className="flex justify-center items-center p-4">
-              <button className="primary-button" onClick={() => router.push('/Cart?redirect=/revieworder')}>Edit Cart</button>
+              <button
+                className="primary-button"
+                onClick={() => router.push("/Cart?redirect=/revieworder")}
+              >
+                Edit Cart
+              </button>
             </div>
           </div>
         </div>
         <div className="md:col-span-2">
           <div className="shadow-2xl card-no-hover p-4">
-            <h2 className="text-3xl text-center">Sub Total</h2>
+            <h2 className="text-3xl text-center">Order Total</h2>
+            <div className="flex justify-between border-b-2 border-black">
+              <div>Shipping Price</div>
+              <div>${shippingPrice}</div>
+            </div>
+            <div className="flex justify-between border-b-2 border-black">
+              <div>Tax Price</div>
+              <div>${taxPrice}</div>
+            </div>
+            <div className="flex justify-between border-b-2 border-black">
+              <div>Price before tax</div>
+              <div>${totalPrice}</div>
+            </div>
+            <div className="flex justify-between items-end py-4">
+              <div className="text-2xl font-bold">Total:</div>
+              <div className="text-2xl font-bold">${totalPrice}</div>
+            </div>
+            <div className="flex justify-center">
+              <button className="primary-button">Final Check Out</button>
+            </div>
           </div>
         </div>
       </div>
     </Layout>
   );
 }
-
+ReviewOrder.auth = true
 export default dynamic(() => Promise.resolve(ReviewOrder), { ssr: false });
