@@ -4,14 +4,37 @@ import { useSession } from "next-auth/react";
 import Layout from "../../components/Layout";
 import db from "../../utils/db";
 import User from "../../models/User";
+import verify from "../../utils/verify";
+import VerifyCredentials from "../../components/VerifyCredentials";
 
 export default function Profile(props) {
+  const [verifyHandler, setHandler] = useState();
+  const [openAuthenticate, setOpenAuthenticate] = useState(true);
   const { status, data: session } = useSession();
   const { state, dispatch } = useContext(UserState);
-  const { user } = props;
-  console.log(JSON.parse(user));
+  const user = JSON.parse(props.user);
 
-  return <Layout></Layout>;
+  useEffect(() => {
+    console.log(verifyHandler);
+  }, [verifyHandler]);
+
+  return (
+    <Layout>
+      <button
+        onClick={() =>
+          verify(user.email, "Snowman@1923").then((data) => setHandler(data))
+        }
+      >
+        Press
+      </button>
+      {openAuthenticate && (
+        <VerifyCredentials
+          setVerifyHandler={setHandler}
+          setForcedExit={setOpenAuthenticate}
+        />
+      )}
+    </Layout>
+  );
 }
 
 export async function getServerSideProps(context) {
@@ -20,13 +43,13 @@ export async function getServerSideProps(context) {
   const getUserEmail = decodeURIComponent(id);
   db.connect();
   const data = await User.findOne({ email: getUserEmail }).lean();
-  delete data.password
-  console.log(data)
+  data.password = 0;
+  console.log(data);
   const user = JSON.stringify(data);
   db.disconnect();
   return {
     props: {
-      user: user 
+      user: user,
     },
-  }; 
+  };
 }
