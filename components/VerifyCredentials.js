@@ -23,9 +23,9 @@ export default function VerifyCredentials(props) {
   };
 
   return (
-    <div className="opacity-animation-1000 opacity-0 z-20 bg-white bg-opacity-25 w-screen h-full absolute top-0 left-0 flex justify-center items-center">
+    <div className="opacity-animation-1000 opacity-0 z-20 bg-white bg-opacity-50 w-screen h-full absolute top-0 left-0 flex justify-center items-center">
       <form
-        className="max-w-screen-md m-auto px-4"
+        className="max-w-screen-md m-auto px-4 py-2 bg-slate-400 bg-opacity-80"
         onSubmit={handleSubmit(submitHandler)}
       >
         <div className="flex justify-end items-center">
