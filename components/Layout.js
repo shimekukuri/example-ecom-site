@@ -37,7 +37,7 @@ export default function Layout({ title, children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ToastContainer limit={3} position="top-center" />
+      <ToastContainer limit={3} position="bottom-center" />
 
       <div className="flex min-h-screen flex-col justify-between bg-gradient-to-r from-purple-500 to-pink-500">
         <header>
@@ -60,7 +60,7 @@ export default function Layout({ title, children }) {
                       <Menu.Item>
                         <DropdownLink
                           className="dropdown-link rounded-t-xl"
-                          href="/profile"
+                          href={session ? `/users/${encodeURIComponent(session.user.email)}` : `/login`}
                         >
                           Profile
                         </DropdownLink>
