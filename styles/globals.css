@@ -30,7 +30,7 @@ a {
 }
 
 .card-no-hover {
-  @apply shadow-lg rounded-lg bg-white
+  @apply shadow-2xl rounded-lg bg-white
 }
 
 .card-with-hover {
