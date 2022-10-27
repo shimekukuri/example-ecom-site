@@ -30,7 +30,7 @@ export default function Profile(props) {
 
       <div className="grid md:grid-cols-2 md:grid-rows-2 md:gap-4 gap-8">
         <div className="card-no-hover px-3 py-2 shadow-xl">
-          <h2 className="text-2xl font-bold text-center">Test 1</h2>
+          <h2 className="text-2xl font-bold text-center">Update Shipping Address</h2>
           <div className="md:h-64 max-h-64 overflow-y-auto">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -156,3 +156,5 @@ export async function getServerSideProps(context) {
     return { props: { user: data } };
   }
 }
+
+Profile.auth = true;
