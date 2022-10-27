@@ -7,24 +7,27 @@ const handler = async (req, res) => {
 
   if (req.method !== "POST") {
     res.status(500).send({ message: "bad type" });
+    return
   }
 
-  if (!credentialEmail, !credentialPassword) {
+  if (!credentialEmail || !credentialPassword) {
     res.status(422).send({ message: "missing fields" });
+    return
   }
 
   db.connect();
   const user = await User.findOne({ email: credentialEmail });
-  db.disconnect();
   if (user && bcryptjs.compareSync(credentialPassword, user.password)) {
     res.status(200).send({
       authorized: true,
     });
+    return
   }
-
+  
   res.status(200).send({
     authorized: false,
   });
+  db.disconnect();
   return;
 };
 

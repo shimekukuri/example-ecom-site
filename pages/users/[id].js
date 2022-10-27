@@ -4,12 +4,11 @@ import { useSession } from "next-auth/react";
 import Layout from "../../components/Layout";
 import db from "../../utils/db";
 import User from "../../models/User";
-import verify from "../../utils/verify";
 import VerifyCredentials from "../../components/VerifyCredentials";
 
 export default function Profile(props) {
   const [verifyHandler, setHandler] = useState();
-  const [openAuthenticate, setOpenAuthenticate] = useState(true);
+  const [openAuthenticate, setOpenAuthenticate] = useState(false);
   const { status, data: session } = useSession();
   const { state, dispatch } = useContext(UserState);
   const user = JSON.parse(props.user);
@@ -20,19 +19,20 @@ export default function Profile(props) {
 
   return (
     <Layout>
-      <button
-        onClick={() =>
-          verify(user.email, "Snowman@1923").then((data) => setHandler(data))
-        }
-      >
-        Press
-      </button>
+      <button onClick={() => setOpenAuthenticate(true)}>Press</button>
       {openAuthenticate && (
         <VerifyCredentials
           setVerifyHandler={setHandler}
           setForcedExit={setOpenAuthenticate}
+          handler={verifyHandler}
         />
       )}
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="card-no-hover px-3 py-2 shadow-xl"><div className="h-44"></div></div>
+        <div className="card-no-hover px-3 py-2 shadow-xl">x</div>
+        <div className="card-no-hover px-3 py-2 shadow-xl">x</div>
+        <div className="card-no-hover px-3 py-2 shadow-xl">x</div>
+      </div>
     </Layout>
   );
 }
@@ -42,14 +42,18 @@ export async function getServerSideProps(context) {
   const { id } = params;
   const getUserEmail = decodeURIComponent(id);
   db.connect();
-  const data = await User.findOne({ email: getUserEmail }).lean();
-  data.password = 0;
-  console.log(data);
-  const user = JSON.stringify(data);
-  db.disconnect();
-  return {
-    props: {
-      user: user,
-    },
-  };
+  let data = await User.findOne({ email: getUserEmail }).lean();
+  if (data) {
+    data.password = 0;
+    const user = JSON.stringify(data);
+    db.disconnect();
+    return {
+      props: {
+        user: user,
+      },
+    };
+  } else {
+    let data = { email: "void", password: "void" };
+    return { props: { user: data } };
+  }
 }

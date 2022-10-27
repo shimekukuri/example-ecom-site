@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import verify from "../utils/verify";
 import { XCircleIcon } from "@heroicons/react/outline";
 
 export default function VerifyCredentials(props) {
-  const { setVerifyHandler, setForcedExit } = props;
+  const { setVerifyHandler, setForcedExit, handler } = props;
 
   const {
     handleSubmit,
@@ -12,8 +12,14 @@ export default function VerifyCredentials(props) {
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+
+    setForcedExit(!handler?.authorized ?? false);
+  }, [handler])
+
   const submitHandler = ({ email, password }) => {
     verify(email, password).then((data) => setVerifyHandler(data));
+
   };
 
   return (
@@ -29,7 +35,7 @@ export default function VerifyCredentials(props) {
         <input
           type="email"
           id="email"
-          className="w-full mb-2 shadow-xl"
+          className="w-full mb-2 shadow-"
           autoFocus
           {...register("email", {
             required: "Please Enter an address",
