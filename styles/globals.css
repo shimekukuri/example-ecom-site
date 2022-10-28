@@ -21,6 +21,10 @@ a {
   box-sizing: border-box;
 }
 
+th, td {
+  word-wrap: break-word;
+}
+
 .card {
   @apply shadow-2xl rounded-lg bg-gradient-to-r from-sky-300 to-indigo-300
 }
