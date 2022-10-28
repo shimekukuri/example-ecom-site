@@ -4,7 +4,7 @@ import verify from "../utils/verify";
 import { XCircleIcon } from "@heroicons/react/outline";
 
 export default function VerifyCredentials(props) {
-  const { setVerifyHandler, setForcedExit, handler } = props;
+  const { setVerifyHandler, setForcedExit, handler, loggedInUser } = props;
 
   const {
     handleSubmit,
@@ -18,6 +18,9 @@ export default function VerifyCredentials(props) {
   }, [handler])
 
   const submitHandler = ({ email, password }) => {
+    if(email !== loggedInUser) {
+      setVerifyHandler({authorized: false})
+    }
     verify(email, password).then((data) => setVerifyHandler(data));
 
   };
