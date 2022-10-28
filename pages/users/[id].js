@@ -8,7 +8,6 @@ import VerifyCredentials from "../../components/VerifyCredentials";
 import { XCircleIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-import 
 
 export default function Profile(props) {
   const [verifyHandler, setHandler] = useState();
