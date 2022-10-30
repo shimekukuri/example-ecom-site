@@ -44,7 +44,7 @@ export default function LoginPage() {
   return (
     <Layout title="Login">
       <div className="w-full flex justify-center">
-        <div className="p-8 bg-slate-300 w-full md:w-2/5 lg:w-2/5 rounded-xl shadow-xl">
+        <div className="p-8 bg-slate-300 w-full md:w-4/5 lg:w-2/5 rounded-xl shadow-xl">
           <h1 className="text-center text-2xl">Login</h1>
           <form
             className="max-w-screen-md m-auto"
