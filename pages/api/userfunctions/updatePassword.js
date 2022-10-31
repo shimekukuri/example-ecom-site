@@ -14,9 +14,16 @@ const handler = async (req, res) => {
   if (user && bcryptjs.compareSync(oldPassword, user.password)) {
     user.password = bcryptjs.hashSync(newPassword);
     user.save();
-    res.status(200).send({ message: "Password Updated successfully" });
+    res
+      .status(200)
+      .send({ message: "Password Updated successfully", success: true });
+    db.disconnect();
+    return;
   }
-  db.disconnect();
+  res
+    .status(422)
+    .send({ message: "Failed to authenticate old password", success: false });
+    db.disconnect();
   return;
 };
 

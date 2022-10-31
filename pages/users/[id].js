@@ -9,6 +9,7 @@ import { XCircleIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import UpdateUsername from "../../components/UpdateUsername";
+import UpdatePassword from "../../components/UpdatePassword";
 
 export default function Profile(props) {
   const [verifyHandler, setHandler] = useState();
@@ -114,29 +115,7 @@ export default function Profile(props) {
               setForcedExit={setOpenAuthenticate}
             />
             <h3 className="text-lg text-center py-4">Change User Password</h3>
-            <form className="border-2 border-black flex flex-col px-4 py-2 rounded-2xl shadow-xl bg-slate-300">
-              <label htmlFor="passwordold">Old Password</label>
-              <input
-                className="border-black border-2 rounded-xl pl-5"
-                id="passwordold"
-                type="text"
-              />
-              <label htmlFor="passwordnew">New Password</label>
-              <input
-                className="border-black border-2 rounded-xl px-2 pl-5"
-                id="passwordnew"
-                type="text"
-              />
-              <label htmlFor="passwordconfirm">Confirm Password</label>
-              <input
-                className="border-black border-2 rounded-xl pl-5"
-                id="passwordconfirm"
-                type="text"
-              />
-              <div className="w-full flex items-center justify-center pt-2">
-                <button className="primary-button">Submit</button>
-              </div>
-            </form>
+            <UpdatePassword verified={verifyHandler} setForcedExit={setOpenAuthenticate} loggedInUser={userSession.email}/>
           </div>
         </div>
         <div className="card-no-hover px-3 py-2 shadow-xl">
