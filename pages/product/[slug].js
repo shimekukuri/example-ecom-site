@@ -25,7 +25,7 @@ export default function ProductPage(props) {
       type: ACTIONS.CART_ADD_ITEM,
       payload: { ...product, quantity: quantity },
     });
-    console.log(state)
+    toast.success("Item Added To Cart")
   };
 
   if (!product) {
