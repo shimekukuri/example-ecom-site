@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CheckOut from "../components/CheckOut";
 import Layout from "../components/Layout";
 import { ACTIONS } from "../utils/ACTIONS";
@@ -9,6 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import getStripe from "../utils/get-stripe"
 
 function ReviewOrder() {
   const { state, dispatch } = useContext(UserState);
@@ -27,6 +28,38 @@ function ReviewOrder() {
   const shippingPrice = itemsPrice > 200 ? 0 : 15;
   const taxPrice = round2(itemsPrice * 0.15);
   const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
+
+  useEffect(() => {
+    console.log(state.cart.cartItems);
+  },);
+
+  const handleFinalCheckout = async () => {
+    //need image name description and quantity
+
+    try {
+      const request = await fetch("/api/checkoutsessions/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          items: state.cart.cartItems,
+        }),
+      });
+      if(request.status === 500) {
+        console.error(request.message)
+      }
+      const response = await request.json();
+
+      const stripe = await getStripe();
+      const {error} = await stripe.redirectToCheckout({sessionId: response.id});
+
+      console.warn(error.message);
+      
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <Layout>
@@ -128,7 +161,9 @@ function ReviewOrder() {
               <div className="text-2xl font-bold">${totalPrice}</div>
             </div>
             <div className="flex justify-center">
-              <button className="primary-button">Final Check Out</button>
+              <button className="primary-button" onClick={handleFinalCheckout}>
+                Final Check Out
+              </button>
             </div>
           </div>
         </div>
@@ -136,5 +171,5 @@ function ReviewOrder() {
     </Layout>
   );
 }
-ReviewOrder.auth = true
+ReviewOrder.auth = true;
 export default dynamic(() => Promise.resolve(ReviewOrder), { ssr: false });
