@@ -2,12 +2,24 @@ import User from "../../../models/User";
 import Order from "../../../models/Order";
 
 const handler = async (req, res) => {
-  const { body, method, header} = req;
-  const { user } = body;
-  if(method !== "POST") {
-    res.status(422).end({message: "Bad type"});
+  const { body, method, header } = req;
+  const {
+    userEmail,
+    shippingAddress,
+    paymentMethod,
+    itemsPrice,
+    shippingPrice,
+    taxPrice,
+    totalPrice,
+    isPaid,
+    isDelivered,
+    paidAt,
+    deliveredAT,
+  } = body;
+  if (method !== "POST") {
+    res.status(422).end({ message: "Bad type" });
   }
-  console.log(user)
+  res.status(200).send({success: true});
   return;
 };
 
