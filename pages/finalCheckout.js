@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { UserState } from "../utils/UserState";
 import { ACTIONS } from "../utils/ACTIONS";
+import BarLoader from "react-spinners/BarLoader";
 
 export default function FinalCheckout(props) {
   const [loading, setLoading] = useState(false);
@@ -61,7 +62,7 @@ export default function FinalCheckout(props) {
       .then((meep) => {
         dispatch({ type: ACTIONS.CART_RESET });
         setLoading(false);
-        if (paymentStatus === true) {
+        if (paymentStatus === "success") {
           setShowSuccess(true);
         }
       })
@@ -73,8 +74,18 @@ export default function FinalCheckout(props) {
   return (
     <Layout title="Final Checkout">
       <CheckOut step={4} />
-      {loading && <div>Loading</div>}
-      {showSuccess && <div>Worked</div>}
+      <div className="flex justify-center items-center mt-6 w-full">
+        <BarLoader loading={loading} size={100} />
+      </div>
+      {showSuccess && (
+        <>
+          <h1 className="text-4xl text-center">Your Order Has Been Placed!</h1>
+          <p className="text-center">
+            To check details of your order navigate to the order history screen
+            by clicking your user name in the top right corner.
+          </p>
+        </>
+      )}
     </Layout>
   );
 }
