@@ -27,7 +27,6 @@ const handler = async (req, res) => {
     !userEmail ||
     !orderItems ||
     !shippingAddress ||
-    !paymentMethod ||
     !itemsPrice ||
     !shippingPrice ||
     !taxPrice ||
@@ -35,12 +34,12 @@ const handler = async (req, res) => {
     !isPaid
   ) {
     res
-      .status(201)
+      .status(422)
       .send({
         userEmail: !!userEmail,
         orderItems: !!orderItems,
         shippingAddress: !!shippingAddress,
-        paymentMethod: paymentMethod,
+        paymentMethod: !!paymentMethod,
         itemsPrice: !!itemsPrice,
         shippingPrice: !!shippingPrice,
         taxPrice: !!taxPrice,
@@ -57,7 +56,7 @@ const handler = async (req, res) => {
     user: findExistingUser,
     orderItems: orderItems,
     shippingAddress: shippingAddress,
-    paymentMethod: paymentMethod,
+    paymentMethod: "stripe",
     itemsPrice,
     shippingPrice,
     taxPrice: taxPrice,

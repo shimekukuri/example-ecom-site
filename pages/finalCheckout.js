@@ -44,7 +44,6 @@ export default function FinalCheckout(props) {
         userEmail: session.user.email,
         orderItems: state.cart.cartItems,
         shippingAddress: state.cart.shippingAddress,
-        paymentMethod: paymentMethod,
         itemsPrice: itemsPrice,
         shippingPrice: `${shippingPrice}`,
         taxPrice: taxPrice,
@@ -57,6 +56,7 @@ export default function FinalCheckout(props) {
     })
       .then((res) => res.json())
       .then((meep) => {
+        console.log(meep)
         dispatch({ type: ACTIONS.CART_RESET });
         setLoading(false);
         if (paymentStatus === "success") {
