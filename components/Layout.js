@@ -68,7 +68,7 @@ export default function Layout({ title, children }) {
                       <Menu.Item>
                         <DropdownLink
                           className="dropdown-link"
-                          href="/order-history"
+                          href={session ? `/orderHistory?id=${encodeURIComponent(session.user.email)}` : `/login`}
                         >
                           Order History
                         </DropdownLink>
