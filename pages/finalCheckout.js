@@ -11,7 +11,6 @@ export default function FinalCheckout(props) {
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const { status, data: session } = useSession();
-
   const { state, dispatch } = useContext(UserState);
   const {
     cart: { cartItems, paymentMethod },
@@ -23,11 +22,9 @@ export default function FinalCheckout(props) {
   ({ status: paymentStatus } = router.query);
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
-
   const itemsPrice = round2(
     cartItems.reduce((t, c) => t + c.quantity * c.price, 0)
   );
-
   const shippingPrice = itemsPrice > 200 ? 0 : 15;
   const taxPrice = round2(itemsPrice * 0.15);
   const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
