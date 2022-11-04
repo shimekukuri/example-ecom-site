@@ -71,10 +71,6 @@ export default function Shipping() {
     const addressExists = await addressList.filter(
       (addr) => JSON.stringify(addr.address) === JSON.stringify(address)
     );
-    addressList.forEach(element => {
-      console.log(element.address, address)
-    });
-    console.log(addressExists)
     if (addressExists.length <= 0) {
       const request = await fetch("api/userfunctions/updateSA", {
         method: "POST",
