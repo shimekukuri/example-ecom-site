@@ -11,7 +11,6 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     let { items } = req.body;
-    console.log(items)
     const prepItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map(
       (item: any) =>
         ({

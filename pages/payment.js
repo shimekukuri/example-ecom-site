@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import CheckOut from "../components/CheckOut";
 import Layout from "../components/Layout";
 import { useRouter } from "next/router";

@@ -20,12 +20,6 @@ export default function Profile(props) {
   const { state, dispatch } = useContext(UserState);
   const user = JSON.parse(props.user);
 
-  useEffect(() => {
-    console.log(verifyHandler);
-    console.log(user);
-    console.log(userSession.email);
-  }, [verifyHandler]);
-
   const handleUserNameChange = (x) => {
     if ((verifyHandler ?? false) === false) {
       setOpenAuthenticate(true);

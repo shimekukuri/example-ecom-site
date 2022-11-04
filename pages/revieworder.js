@@ -17,7 +17,6 @@ function ReviewOrder() {
   const { shippingAddress, paymentMethod, cartItems } = cart;
   const { status, data: session } = useSession();
   const router = useRouter();
-  console.log(cartItems);
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
 
@@ -28,10 +27,6 @@ function ReviewOrder() {
   const shippingPrice = itemsPrice > 200 ? 0 : 15;
   const taxPrice = round2(itemsPrice * 0.15);
   const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
-
-  useEffect(() => {
-    console.log(state.cart.cartItems);
-  },);
 
   const handleFinalCheckout = async () => {
     //need image name description and quantity

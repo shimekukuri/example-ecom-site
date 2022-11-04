@@ -34,7 +34,6 @@ const handler = async (req, res) => {
     !totalPrice ||
     !isPaid
   ) {
-    console.log("Triggered first check");
     res
       .status(201)
       .send({

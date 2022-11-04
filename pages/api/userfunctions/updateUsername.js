@@ -14,7 +14,6 @@ const handler = async (req, res) => {
   user.save();
   db.disconnect();
   res.status(200).send({message: "Email Change successfull", success: true});
-  console.log(user);
   return
 };
 
