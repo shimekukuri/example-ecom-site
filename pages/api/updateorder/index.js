@@ -4,6 +4,7 @@ import db from "../../../utils/db";
 
 const handler = async (req, res) => {
   const { body, method, header } = req;
+  await db.connect();
   const {
     userEmail,
     orderItems,
@@ -48,7 +49,6 @@ const handler = async (req, res) => {
       });
     return;
   }
-  db.connect();
 
   const findExistingUser = await User.findOne({ email: userEmail });
 
@@ -68,7 +68,7 @@ const handler = async (req, res) => {
   });
   newOrder.save();
   res.status(200).send(newOrder);
-  db.disconnect();
+  await db.disconnect();
   return;
 };
 

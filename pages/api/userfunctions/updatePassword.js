@@ -9,7 +9,7 @@ const handler = async (req, res) => {
     res.status(422).send({ message: "bad request" });
     return;
   }
-  db.connect();
+  await db.connect();
   let user = await User.findOne({ email: email });
   if (user && bcryptjs.compareSync(oldPassword, user.password)) {
     user.password = bcryptjs.hashSync(newPassword);
@@ -17,13 +17,13 @@ const handler = async (req, res) => {
     res
       .status(200)
       .send({ message: "Password Updated successfully", success: true });
-    db.disconnect();
+    await db.disconnect();
     return;
   }
   res
     .status(422)
     .send({ message: "Failed to authenticate old password", success: false });
-    db.disconnect();
+    await db.disconnect();
   return;
 };
 

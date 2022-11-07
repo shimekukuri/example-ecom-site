@@ -15,7 +15,7 @@ const handler = async (req, res) => {
     return
   }
 
-  db.connect();
+  await db.connect();
   const user = await User.findOne({ email: credentialEmail });
   if (user && bcryptjs.compareSync(credentialPassword, user.password)) {
     res.status(200).send({
@@ -27,7 +27,7 @@ const handler = async (req, res) => {
   res.status(200).send({
     authorized: false,
   });
-  db.disconnect();
+  await db.disconnect();
   return;
 };
 

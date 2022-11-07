@@ -121,12 +121,12 @@ export async function getServerSideProps(context) {
   const { params } = context;
   const { id } = params;
   const getUserEmail = decodeURIComponent(id);
-  db.connect();
+  await db.connect();
   let data = await User.findOne({ email: getUserEmail }).lean();
   if (data) {
     data.password = 0;
     const user = JSON.stringify(data);
-    db.disconnect();
+    await db.disconnect();
     return {
       props: {
         user: user,

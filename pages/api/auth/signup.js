@@ -21,7 +21,7 @@ const handler = async (req, res) => {
       .send({ message: "Missing or information does match criteria" });
   }
 
-  db.connect();
+  await db.connect();
 
   const findExistingUser = await User.findOne({ email: email });
 
@@ -40,7 +40,7 @@ const handler = async (req, res) => {
 
   const user = newUser.save();
 
-  db.disconnect();
+  await db.disconnect();
 
   res.status(200).send({
     message: "User Succuessfully Created",

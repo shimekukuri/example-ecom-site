@@ -8,11 +8,11 @@ const handler = async (req, res) => {
     res.status(500).send({ message: "bad request" });
     return;
   }
-  db.connect();
+  await db.connect();
   let user = await User.findOne({ email: oldEmail });
   user.email = newEmail
   user.save();
-  db.disconnect();
+  await db.disconnect();
   res.status(200).send({message: "Email Change successfull", success: true});
   return
 };

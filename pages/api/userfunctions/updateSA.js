@@ -19,7 +19,7 @@ const handler = async (req, res) => {
       const user = await User.findOne({ email: email });
       user.shippingAddress.push(shippingAddress);
       const confirm = await user.save();
-      db.disconnect();
+      await db.disconnect();
       res.status(200).send({ user: confirm });
       return;
     }
@@ -41,7 +41,7 @@ const handler = async (req, res) => {
       user.shippingAddress = [...result];
       user.save();
       res.status(200).send(user.shippingAddress);
-      db.disconnect();
+      await db.disconnect();
 
       return;
     }
@@ -55,7 +55,7 @@ const handler = async (req, res) => {
       let user = await User.findOne({ email: email });
       const { shippingAddress } = user;
       res.status(200).send({shippingAddress});
-      db.disconnect();
+      await db.disconnect();
       return;
     }
   }
