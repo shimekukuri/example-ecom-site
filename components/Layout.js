@@ -21,10 +21,10 @@ export default function Layout({ title, children }) {
     setCartItemCount(cart.cartItems.reduce((a, c) => (a += c.quantity), 0));
   }, [cart.cartItems]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     dispatch({ type: "CART_RESET" });
     Cookies.remove("cart");
-    signOut({ callbackUrl: "/login" });
+    await signOut({ callbackUrl: "/login" });
   };
 
   return (
