@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { Menu } from "@headlessui/react";
 import DropdownLink from "./DropdownLink";
 import Cookies from "js-cookie";
@@ -18,13 +18,13 @@ export default function Layout({ title, children }) {
   const { cart } = state;
 
   useEffect(() => {
-    setCartItemCount(cart.cartItems.reduce((a, c) => (a += c.quantity), 0));
+    setCartItemCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
   }, [cart.cartItems]);
 
-  const handleLogout = async () => {
-    dispatch({ type: "CART_RESET" });
-    Cookies.remove("cart");
-    await signOut({ callbackUrl: "/login" });
+  const handleLogout = () => {
+    dispatch({ type: ACTIONS.CART_RESET });
+    Cookies.remove('cart');
+    signOut({ callbackUrl: "/login" });
   };
 
   return (
