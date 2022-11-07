@@ -33,12 +33,19 @@ function reducer(state, action) {
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     case ACTIONS.CART_RESET: {
+      Cookies.set(
+        "cart",
+        JSON.stringify({
+          ...state,
+          cart: { cartItems: [], shippingAddress: {}, paymentMethod: "" },
+        })
+      );
       return {
         ...state,
         cart: {
           cartItems: [],
           shippingAddress: {},
-          paymentMethod: ""
+          paymentMethod: "",
         },
       };
     }
@@ -59,7 +66,10 @@ function reducer(state, action) {
       };
     }
     case ACTIONS.SET_PAYMENT_METHOD: {
-      return {...state, cart: { ...state.cart, paymentMethod: action.payload}}
+      return {
+        ...state,
+        cart: { ...state.cart, paymentMethod: action.payload },
+      };
     }
     default: {
       return state;
