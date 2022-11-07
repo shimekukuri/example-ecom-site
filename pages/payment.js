@@ -11,7 +11,7 @@ export default function Payment() {
   const { state, dispatch } = useContext(UserState);
   const { cart: paymentMethod } = state;
 
-  const paymentMethods = ["Debit/Credit", "Paypal", "Stripe"];
+  const paymentMethods = ["Debit/Credit (disabled)", "Paypal (disabled)", "Stripe"];
 
   const submitHandler = (e) => {
     e.preventDefault()
