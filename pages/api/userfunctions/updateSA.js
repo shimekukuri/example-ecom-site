@@ -3,7 +3,7 @@ import User from "../../../models/User";
 
 const handler = async (req, res) => {
   const { updateType } = req.body;
-
+  await db.connect();
   if (req.method !== "POST") {
     res.status(500).send({ message: "bad type" });
   }
@@ -16,7 +16,6 @@ const handler = async (req, res) => {
         res.status(422).send({ message: "Missing fields" });
         return;
       }
-      db.connect();
       const user = await User.findOne({ email: email });
       user.shippingAddress.push(shippingAddress);
       const confirm = await user.save();
@@ -33,7 +32,6 @@ const handler = async (req, res) => {
         return;
       }
 
-      db.connect();
       let user = await User.findOne({ email: email });
 
       const result = await user.shippingAddress.filter((x) => {
@@ -54,7 +52,6 @@ const handler = async (req, res) => {
         res.status(422).send({ message: "Missing email address" });
       }
 
-      db.connect();
       let user = await User.findOne({ email: email });
       const { shippingAddress } = user;
       res.status(200).send({shippingAddress});
@@ -62,7 +59,7 @@ const handler = async (req, res) => {
       return;
     }
   }
-
+  await db.disconnect();
   res.status(500).send({ message: "Unkown error" });
   return;
 };
