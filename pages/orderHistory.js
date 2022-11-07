@@ -13,7 +13,7 @@ export default function OrderHistory(props) {
     <Layout>
       <div className="flex gap-4 flex-col justify-center items-center">
         {ordersArray.map((order, index) => (
-          <OrderComponant index={index} order={order}/>
+          <OrderComponant index={index} order={order} key={order._id}/>
         ))}
       </div>
     </Layout>
