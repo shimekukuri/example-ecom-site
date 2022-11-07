@@ -18,6 +18,9 @@ export default function Layout({ title, children }) {
   const { cart } = state;
 
   useEffect(() => {
+    if(cart.cartItems.length < 1) {
+      return;
+    }
     setCartItemCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
   }, [cart.cartItems]);
 
