@@ -33,13 +33,6 @@ function reducer(state, action) {
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     case ACTIONS.CART_RESET: {
-      Cookies.set(
-        "cart",
-        JSON.stringify({
-          ...state,
-          cart: { cartItems: [], shippingAddress: {}, paymentMethod: "" },
-        })
-      );
       return {
         ...state,
         cart: {
